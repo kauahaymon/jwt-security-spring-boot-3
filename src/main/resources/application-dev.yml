@@ -30,6 +30,8 @@ application:
   security:
     jwt:
       secret-key: 6ab29906e85d99cf397fa4c91ae87bf82128a4cd8630c36d388d084e2f16c301
-      expiration: 1800000
+      expiration: 1800000 # 30 min
+      refresh-token:
+        expiration: 3600000 # 60 min
   mailing:
     activation-url: url
