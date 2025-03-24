@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +26,7 @@ import java.util.List;
 @Entity
 @Table(name = "tb_user")
 @EntityListeners(AuditingEntityListener.class)
-public class User implements UserDetails {
+public class User implements UserDetails, Principal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +36,8 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String email;
     private String password;
+    private boolean accountLocked;
+    private boolean enabled;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -64,7 +67,27 @@ public class User implements UserDetails {
         return email;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !accountLocked;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     public String fullName() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public String getName() {
+        return email;
     }
 }
