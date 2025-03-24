@@ -1,0 +1,31 @@
+services:
+  postgres:
+    container_name: jwt_security_postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: jwt_security
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DATA: /var/lib/postgresql/data
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - 5432:5432
+    networks:
+      - spring-network
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: mail_dev
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+volumes:
+  postgres:
+    driver: local
+
+networks:
+  spring-network:
+    driver: bridge
