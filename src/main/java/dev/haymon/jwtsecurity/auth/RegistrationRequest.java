@@ -12,20 +12,14 @@ import lombok.Setter;
 @Builder
 public class RegistrationRequest {
 
-    private static final String MANDATORY_FIRSTNAME = "Nome é obrigatório";
-    private static final String MANDATORY_LASTNAME = "Sobrenome é obrigatório";
-    private static final String MANDATORY_EMAIL = "Email é obrigatório";
-    private static final String MANDATORY_PASSWORD = "Senha é obrigatório";
-    private static final String RULE_PASSWORD = "Senha deve ter no mínimo 8 caracteres";
-
-    @NotBlank(message = MANDATORY_FIRSTNAME)
+    @NotBlank(message = "Nome é obrigatório")
     private String firstname;
-    @NotBlank(message = MANDATORY_LASTNAME)
+    @NotBlank(message = "Sobrenome é obrigatório")
     private String lastname;
-    @Email
-    @NotBlank(message = MANDATORY_EMAIL)
+    @Email(message = "Formato de e-mail inválido")
+    @NotBlank(message = "Email é obrigatório")
     private String email;
-    @NotBlank(message = MANDATORY_PASSWORD)
-    @Size(min = 8, message = RULE_PASSWORD)
+    @NotBlank(message = "Senha é obrigatório")
+    @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String password;
 }

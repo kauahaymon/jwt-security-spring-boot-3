@@ -12,14 +12,10 @@ import lombok.Setter;
 @Builder
 public class AuthenticationRequest {
 
-    private static final String MANDATORY_EMAIL = "Email é obrigatório";
-    private static final String MANDATORY_PASSWORD = "Senha é obrigatório";
-    private static final String RULE_PASSWORD = "Senha deve ter no mínimo 8 caracteres";
-
     @Email
-    @NotBlank(message = MANDATORY_EMAIL)
+    @NotBlank(message = "Email é obrigatório")
     private String email;
-    @NotBlank(message = MANDATORY_PASSWORD)
-    @Size(min = 8, message = RULE_PASSWORD)
+    @NotBlank(message = "Senha é obrigatório")
+    @Size(min = 8, message = "Senha deve ter no mínimo 8 caracteres")
     private String password;
 }
