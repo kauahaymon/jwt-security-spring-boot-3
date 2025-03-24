@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jwt_security
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    database: postgresql
+  mail:
+    host: localhost
+    port: 1025
+    username: user
+    password: user
+    properties:
+      mail:
+        smtp:
+          trust: "*"
+        auth: true
+        starttls:
+          enable: true
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+application:
+  security:
+    jwt:
+      secret-key: 6ab29906e85d99cf397fa4c91ae87bf82128a4cd8630c36d388d084e2f16c301
+      expiration: 1800000
+  mailing:
+    activation-url: url
