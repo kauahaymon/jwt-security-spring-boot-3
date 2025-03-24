@@ -1,5 +1,6 @@
 package dev.haymon.jwtsecurity.auth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.haymon.jwtsecurity.model.Role;
 import dev.haymon.jwtsecurity.model.Token;
 import dev.haymon.jwtsecurity.model.User;
@@ -10,6 +11,8 @@ import dev.haymon.jwtsecurity.security.JwtService;
 import dev.haymon.jwtsecurity.service.EmailService;
 import dev.haymon.jwtsecurity.service.EmailTemplateName;
 import jakarta.mail.MessagingException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,10 +23,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
 @RequiredArgsConstructor
@@ -109,10 +115,12 @@ public class AuthenticationService {
         var claims = new HashMap<String, Object>();
         User user = (User) authenticated.getPrincipal();
         claims.put("fullName", user.fullName());
-        String token = jwtService.generateToken(user, claims);
+        String accessToken = jwtService.generateToken(user, claims);
+        String refreshToken = jwtService.generateRefreshToken(user);
         return AuthenticationResponse
                 .builder()
-                .token(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
     }
 
@@ -134,5 +142,28 @@ public class AuthenticationService {
 
         savedToken.setValidatedAt(LocalDateTime.now());
         tokenRepository.save(savedToken);
+    }
+
+    public void refreshToken(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) throws IOException {
+        String header = request.getHeader(AUTHORIZATION);
+        if (header == null || !header.startsWith("Bearer ")) {
+            return;
+        }
+        String refreshToken = header.substring(7);
+        String userEmail = jwtService.getSubject(refreshToken);
+        if (userEmail != null) {
+            User user = userRepository.findByEmail(userEmail).orElseThrow();
+            if (jwtService.isTokenValid(refreshToken, user)) {
+                String newToken = jwtService.generateToken(user);
+                AuthenticationResponse authResponse = AuthenticationResponse.builder()
+                        .accessToken(newToken)
+                        .refreshToken(refreshToken)
+                        .build();
+                new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
+            }
+        }
     }
 }

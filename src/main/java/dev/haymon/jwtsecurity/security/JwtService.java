@@ -17,17 +17,47 @@ public class JwtService {
 
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
+    @Value("${application.security.jwt.refresh-token.expiration}")
+    private long refreshExpiration;
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
 
     public String generateToken(UserDetails userDetails, HashMap<String, Object> claims) {
+        return buildToken(
+                userDetails,
+                claims,
+                jwtExpiration,
+                "accessToken"
+        );
+    }
+
+    public String generateToken(UserDetails userDetails) {
+        return generateToken(userDetails, new HashMap<>());
+    }
+
+    public String generateRefreshToken(UserDetails userDetails) {
+        return buildToken(
+                userDetails,
+                new HashMap<>(),
+                refreshExpiration,
+                "refreshToken"
+        );
+    }
+
+    private String buildToken(
+            UserDetails userDetails,
+            HashMap<String, Object> claims,
+            long expiration,
+            String tokenType
+    ) {
         return Jwts
                 .builder()
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .claims(claims)
                 .claim("authorities", userDetails.getAuthorities())
+                .claim("type", tokenType)
                 .signWith(getSignInKey())
                 .compact();
     }
