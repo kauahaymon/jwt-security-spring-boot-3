@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activate Account</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex align-items-center justify-content-center vh-100">
+
+<div class="card shadow-lg p-4 rounded-4" style="max-width: 400px; width: 100%;">
+    <div class="text-center">
+        <h3 class="mb-3">Activate Your Account</h3>
+        <p class="greeting" th:text="'Hello ' + ${username} + ','"></p>
+        <p class="text-muted">Please use the activation code below to get started:</p>
+
+        <div class="bg-light border rounded py-2 px-3 mb-3">
+            <h4 class="mb-0 text-primary fw-bold letter-spacing-wider">
+                <span th:text="${activation_code}"></span>
+            </h4>
+        </div>
+
+        <a th:href="${confirmationUrl}" class="btn btn-primary btn-lg w-100 mt-2">Activate Account</a>
+    </div>
+    <div class="text-center mt-3">
+        <small class="text-muted">Didn't request this? <a href="#">Contact Support</a></small>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
