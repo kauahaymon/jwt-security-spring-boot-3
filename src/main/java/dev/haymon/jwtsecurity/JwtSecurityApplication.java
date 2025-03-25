@@ -17,13 +17,4 @@ public class JwtSecurityApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JwtSecurityApplication.class, args);
 	}
-
-	@Bean
-	public CommandLineRunner commandLineRunner(RoleRepository roleRepository) {
-		return args -> {
-			if (roleRepository.findByName("USER").isEmpty()) {
-				roleRepository.save(Role.builder().name("USER").build());
-			}
-		};
-	}
 }
