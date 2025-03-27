@@ -86,6 +86,18 @@
                     );
         }
 
+        @ExceptionHandler(IllegalArgumentException.class)
+        public ResponseEntity<ExceptionResponse> handleException(IllegalArgumentException e) {
+            return ResponseEntity
+                    .status(FORBIDDEN)
+                    .body(
+                            ExceptionResponse.builder()
+                                    .errorCode(FORBIDDEN.value())
+                                    .description(e.getMessage())
+                                    .build()
+                    );
+        }
+
         @ExceptionHandler(Exception.class)
         public ResponseEntity<ExceptionResponse> handleException(Exception e) {
             e.printStackTrace();
