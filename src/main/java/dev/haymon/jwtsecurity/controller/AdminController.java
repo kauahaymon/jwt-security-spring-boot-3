@@ -29,13 +29,13 @@ public class AdminController {
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteUserById(@PathVariable Integer id) {
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<?> update(
+    public ResponseEntity<?> updateUser(
             @PathVariable Integer id,
             @RequestBody @Valid UserUpdateRequest request
     ) {
