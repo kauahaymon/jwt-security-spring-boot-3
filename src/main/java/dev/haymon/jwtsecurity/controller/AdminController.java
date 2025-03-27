@@ -42,4 +42,11 @@ public class AdminController {
         service.updateUser(id, request);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Integer id) {
+        return service.getUserById(id)
+                .map(user ->  ResponseEntity.ok(userMapper.toDTO(user)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }

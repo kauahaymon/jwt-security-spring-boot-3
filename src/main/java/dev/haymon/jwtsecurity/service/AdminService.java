@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -32,6 +34,10 @@ public class AdminService {
     public void deleteUser(Integer id) {
         deletionValidator.validate(id);
         userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserById(Integer id) {
+        return userRepository.findById(id);
     }
 
     public void updateUser(Integer id, UserUpdateRequest request) {
