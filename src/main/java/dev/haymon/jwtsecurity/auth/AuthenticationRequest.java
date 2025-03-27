@@ -12,7 +12,7 @@ import lombok.Setter;
 @Builder
 public class AuthenticationRequest {
 
-    @Email
+    @Email(message = "Formato de e-mail inválido")
     @NotBlank(message = "Email é obrigatório")
     private String email;
     @NotBlank(message = "Senha é obrigatório")
