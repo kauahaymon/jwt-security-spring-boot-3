@@ -13,6 +13,7 @@ public class UserResponseMapper {
     public UserResponse toDTO(User user) {
         List<String> roles = user.getRoles().stream().map(Role::getName).toList();
         return UserResponse.builder()
+                .id(user.getId())
                 .fullName(user.fullName())
                 .email(user.getEmail())
                 .accountLocked(user.isAccountLocked())
