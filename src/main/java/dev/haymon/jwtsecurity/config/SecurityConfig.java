@@ -29,10 +29,10 @@ public class SecurityConfig {
          http
                  .cors(withDefaults())
                  .csrf(AbstractHttpConfigurer::disable)
-                 .httpBasic(withDefaults())
                  .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/**").permitAll();
-
+                    auth.requestMatchers(WHITE_LIST).permitAll();
+                    auth.requestMatchers(USER_ENDPOINTS).hasAnyRole("USER");
+                    auth.requestMatchers(ADMIN_ENDPOINTS).hasAnyRole("ADMIN");
                     auth.anyRequest().authenticated();
                  })
                  .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
@@ -41,4 +41,17 @@ public class SecurityConfig {
 
          return http.build();
     }
+
+    private static final String[] WHITE_LIST = {
+            "/auth/**"
+    };
+
+    private static final String[] USER_ENDPOINTS = {
+            "/test/users"
+    };
+
+    private static final String[] ADMIN_ENDPOINTS = {
+            "/test/admins/**",
+            "/admin/**"
+    };
 }

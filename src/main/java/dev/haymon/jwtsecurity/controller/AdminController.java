@@ -1,9 +1,10 @@
 package dev.haymon.jwtsecurity.controller;
 
 import dev.haymon.jwtsecurity.controller.dto.UserResponse;
+import dev.haymon.jwtsecurity.controller.dto.UserUpdateRequest;
 import dev.haymon.jwtsecurity.model.User;
 import dev.haymon.jwtsecurity.service.AdminService;
-import dev.haymon.jwtsecurity.service.validation.UserDeletionValidator;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,16 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        service.delete(id);
+        service.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/users/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable Integer id,
+            @RequestBody @Valid UserUpdateRequest request
+    ) {
+        service.updateUser(id, request);
         return ResponseEntity.noContent().build();
     }
 }
