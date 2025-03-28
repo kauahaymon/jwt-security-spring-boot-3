@@ -36,4 +36,10 @@ public class ProductController {
                 .map(user -> ResponseEntity.ok(mapper.toDTO(user)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+       service.deleteById(id);
+       return ResponseEntity.noContent().build();
+    }
 }

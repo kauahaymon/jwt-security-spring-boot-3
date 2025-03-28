@@ -1,4 +1,4 @@
-package dev.haymon.jwtsecurity.controller;
+package dev.haymon.jwtsecurity.controller.mapper;
 
 import dev.haymon.jwtsecurity.controller.dto.UserResponse;
 import dev.haymon.jwtsecurity.model.Role;
