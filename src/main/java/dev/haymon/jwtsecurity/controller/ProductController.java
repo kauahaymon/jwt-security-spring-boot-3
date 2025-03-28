@@ -1,17 +1,13 @@
 package dev.haymon.jwtsecurity.controller;
 
-import dev.haymon.jwtsecurity.controller.dto.product.ProductRequest;
 import dev.haymon.jwtsecurity.controller.dto.product.ProductResponse;
 import dev.haymon.jwtsecurity.controller.mapper.ProductMapper;
 import dev.haymon.jwtsecurity.model.Product;
 import dev.haymon.jwtsecurity.service.ProductService;
-import dev.haymon.jwtsecurity.util.UriUtil;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
 
 @RestController
 @RequestMapping("/products")
@@ -21,15 +17,6 @@ public class ProductController {
     private final ProductService service;
     private final ProductMapper mapper;
 
-    @PostMapping
-    public ResponseEntity<?> register(
-            @RequestBody @Valid ProductRequest request
-    ) {
-        Product savedProduct = service.register(request);
-        URI uri = UriUtil.generateLocation(savedProduct.getId());
-        return ResponseEntity.created(uri).build();
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponse> getById(@PathVariable Integer id) {
         return service.getById(id)
@@ -37,18 +24,14 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
-       service.deleteById(id);
-       return ResponseEntity.noContent().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> update(
-            @PathVariable Integer id,
-            @RequestBody @Valid ProductRequest request
+    @GetMapping
+    public ResponseEntity<Page<ProductResponse>> getAll(
+            @RequestParam(defaultValue = "0") Integer pageNumber,
+            @RequestParam(defaultValue = "20") Integer pageSize
     ) {
-       service.update(id, request);
-       return ResponseEntity.noContent().build();
+        Page<Product> products = service.getProductsPage(pageNumber, pageSize);
+        Page<ProductResponse> responsePage = products.map(mapper::toDTO);
+
+        return ResponseEntity.ok(responsePage);
     }
 }

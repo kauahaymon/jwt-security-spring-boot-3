@@ -5,6 +5,9 @@ import dev.haymon.jwtsecurity.model.Product;
 import dev.haymon.jwtsecurity.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -40,5 +43,10 @@ public class ProductService {
             product.setDescription(request.getDescription());
             return repository.save(product);
         }).orElseThrow(() -> new EntityNotFoundException("Produto não encontrado"));
+    }
+
+    public Page<Product> getProductsPage(Integer pageNumber, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        return repository.findAll(pageable);
     }
 }
