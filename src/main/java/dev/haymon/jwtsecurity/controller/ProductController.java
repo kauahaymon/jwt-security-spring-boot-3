@@ -1,6 +1,6 @@
 package dev.haymon.jwtsecurity.controller;
 
-import dev.haymon.jwtsecurity.controller.dto.product.ProductRegisterRequest;
+import dev.haymon.jwtsecurity.controller.dto.product.ProductRequest;
 import dev.haymon.jwtsecurity.controller.dto.product.ProductResponse;
 import dev.haymon.jwtsecurity.controller.mapper.ProductMapper;
 import dev.haymon.jwtsecurity.model.Product;
@@ -23,7 +23,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<?> register(
-            @RequestBody @Valid ProductRegisterRequest request
+            @RequestBody @Valid ProductRequest request
     ) {
         Product savedProduct = service.register(request);
         URI uri = UriUtil.generateLocation(savedProduct.getId());
@@ -40,6 +40,15 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
        service.deleteById(id);
+       return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable Integer id,
+            @RequestBody @Valid ProductRequest request
+    ) {
+       service.update(id, request);
        return ResponseEntity.noContent().build();
     }
 }
