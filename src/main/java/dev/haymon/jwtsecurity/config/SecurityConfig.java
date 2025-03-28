@@ -31,7 +31,7 @@ public class SecurityConfig {
                  .csrf(AbstractHttpConfigurer::disable)
                  .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(WHITE_LIST).permitAll();
-                    auth.requestMatchers(USER_ENDPOINTS).hasAnyRole("USER");
+                    auth.requestMatchers(USER_ENDPOINTS).hasAnyRole("USER", "ADMIN");
                     auth.requestMatchers(ADMIN_ENDPOINTS).hasAnyRole("ADMIN");
                     auth.anyRequest().authenticated();
                  })
@@ -47,12 +47,12 @@ public class SecurityConfig {
     };
 
     private static final String[] USER_ENDPOINTS = {
-            "/test/users"
+            "/test/users",
+            "/products/**"
     };
 
     private static final String[] ADMIN_ENDPOINTS = {
             "/test/admins/**",
-            "/products/**",
             "/admin/**"
     };
 }
