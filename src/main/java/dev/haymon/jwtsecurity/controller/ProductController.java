@@ -1,16 +1,15 @@
 package dev.haymon.jwtsecurity.controller;
 
-import dev.haymon.jwtsecurity.controller.dto.ProductRegisterRequest;
+import dev.haymon.jwtsecurity.controller.dto.product.ProductRegisterRequest;
+import dev.haymon.jwtsecurity.controller.dto.product.ProductResponse;
+import dev.haymon.jwtsecurity.controller.mapper.ProductMapper;
 import dev.haymon.jwtsecurity.model.Product;
 import dev.haymon.jwtsecurity.service.ProductService;
 import dev.haymon.jwtsecurity.util.UriUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -20,6 +19,7 @@ import java.net.URI;
 public class ProductController {
 
     private final ProductService service;
+    private final ProductMapper mapper;
 
     @PostMapping
     public ResponseEntity<?> register(
@@ -28,5 +28,12 @@ public class ProductController {
         Product savedProduct = service.register(request);
         URI uri = UriUtil.generateLocation(savedProduct.getId());
         return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getById(@PathVariable Integer id) {
+        return service.getById(id)
+                .map(user -> ResponseEntity.ok(mapper.toDTO(user)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
