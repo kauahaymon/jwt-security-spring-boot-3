@@ -12,6 +12,9 @@ import dev.haymon.jwtsecurity.repository.ProductRepository;
 import dev.haymon.jwtsecurity.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,5 +58,11 @@ public class OrderService {
         newOrder.calculateTotal();
 
         return repository.save(newOrder);
+    }
+
+    public Page<Order> getPageOrders(Integer pageNumber, Integer pageSize) {
+        User currentUser = SecurityUtil.getAuthenticatedUser();
+        Pageable orderPage = PageRequest.of(pageNumber, pageSize);
+        return repository.findByUser(currentUser, orderPage);
     }
 }
