@@ -61,7 +61,7 @@ public class OrderService {
         return repository.save(newOrder);
     }
 
-    public Page<Order> getPageOrders(Integer pageNumber, Integer pageSize) {
+    public Page<Order> getUserOrders(Integer pageNumber, Integer pageSize) {
         User currentUser = SecurityUtil.getAuthenticatedUser();
         Pageable orderPage = PageRequest.of(pageNumber, pageSize);
         return repository.findByUser(currentUser, orderPage);

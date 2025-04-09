@@ -5,7 +5,6 @@ import dev.haymon.jwtsecurity.controller.dto.order.OrderResponse;
 import dev.haymon.jwtsecurity.controller.mapper.OrderMapper;
 import dev.haymon.jwtsecurity.model.Order;
 import dev.haymon.jwtsecurity.service.OrderService;
-import dev.haymon.jwtsecurity.util.UriUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +34,7 @@ public class OrderController {
             @RequestParam(defaultValue = "0") Integer pageNumber,
             @RequestParam(defaultValue = "10") Integer pageSize
     ) {
-        Page<Order> pageOrders = service.getPageOrders(pageNumber, pageSize);
+        Page<Order> pageOrders = service.getUserOrders(pageNumber, pageSize);
         Page<OrderResponse> orderResponses = pageOrders.map(mapper::toResponseDTO);
 
         return ResponseEntity.ok(orderResponses);
