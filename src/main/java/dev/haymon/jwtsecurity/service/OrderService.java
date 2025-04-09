@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -64,5 +65,9 @@ public class OrderService {
         User currentUser = SecurityUtil.getAuthenticatedUser();
         Pageable orderPage = PageRequest.of(pageNumber, pageSize);
         return repository.findByUser(currentUser, orderPage);
+    }
+
+    public Optional<Order> gerOrderDetails(Integer id) {
+        return repository.findById(id);
     }
 }

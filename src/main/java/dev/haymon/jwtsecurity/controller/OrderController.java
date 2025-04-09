@@ -40,4 +40,11 @@ public class OrderController {
 
         return ResponseEntity.ok(orderResponses);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderResponse> getOrderDetails(@PathVariable Integer id) {
+        return service.gerOrderDetails(id)
+                .map(order -> ResponseEntity.ok(mapper.toResponseDTO(order)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
