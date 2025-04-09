@@ -30,4 +30,8 @@ public class OrderItem {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    public BigDecimal getSubTotal() {
+        return unitPrice.multiply(BigDecimal.valueOf(quantity));
+    }
 }

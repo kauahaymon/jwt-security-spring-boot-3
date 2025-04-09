@@ -15,4 +15,5 @@ public class OrderItemResponse {
     private String nome;
     private int quantity;
     private BigDecimal unitPrice;
+    private BigDecimal subTotal;
 }

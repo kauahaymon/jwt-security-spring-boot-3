@@ -18,6 +18,7 @@ public class OrderMapper {
                         .nome(orderItem.getProduct().getName())
                         .quantity(orderItem.getQuantity())
                         .unitPrice(orderItem.getUnitPrice())
+                        .subTotal(orderItem.getSubTotal())
                         .build())
                         .toList();
 
