@@ -2,16 +2,22 @@ package dev.haymon.jwtsecurity.controller;
 
 import dev.haymon.jwtsecurity.controller.dto.UserResponse;
 import dev.haymon.jwtsecurity.controller.dto.UserUpdateRequest;
+import dev.haymon.jwtsecurity.controller.dto.order.OrderResponse;
 import dev.haymon.jwtsecurity.controller.dto.product.ProductRequest;
+import dev.haymon.jwtsecurity.controller.mapper.OrderMapper;
 import dev.haymon.jwtsecurity.controller.mapper.UserResponseMapper;
 import dev.haymon.jwtsecurity.model.Product;
 import dev.haymon.jwtsecurity.model.User;
 import dev.haymon.jwtsecurity.service.AdminService;
+import dev.haymon.jwtsecurity.service.OrderService;
 import dev.haymon.jwtsecurity.service.ProductService;
 import dev.haymon.jwtsecurity.util.UriUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +31,8 @@ public class AdminController {
     private final AdminService service;
     private final UserResponseMapper userMapper;
     private final ProductService productService;
+    private final OrderService orderService;
+    private final OrderMapper orderMapper;
 
     @GetMapping("/users")
     public ResponseEntity<Page<UserResponse>> listOfUsers(
@@ -81,4 +89,24 @@ public class AdminController {
         productService.update(id, request);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/orders")
+    public ResponseEntity<Page<OrderResponse>> listAllOrders(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "15") Integer size,
+            @RequestParam(required = false, defaultValue = "id") String sort,
+            @RequestParam(required = false, defaultValue = "asc") String direction
+    ) {
+        Sort sortDirection = direction.equalsIgnoreCase("desc")
+                ? Sort.by(sort).descending()
+                : Sort.by(sort).ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sortDirection);
+
+        Page<OrderResponse> orderResponses = orderService.getAllOrders(pageable)
+                .map(orderMapper::toResponseDTO);
+
+        return ResponseEntity.ok(orderResponses);
+    }
+
 }

@@ -70,4 +70,8 @@ public class OrderService {
     public Optional<Order> gerOrderDetails(Integer id) {
         return repository.findById(id);
     }
+
+    public Page<Order> getAllOrders(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
 }
