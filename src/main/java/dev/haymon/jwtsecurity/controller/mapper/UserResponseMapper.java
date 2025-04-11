@@ -1,26 +1,24 @@
 package dev.haymon.jwtsecurity.controller.mapper;
 
-import dev.haymon.jwtsecurity.controller.dto.UserResponse;
-import dev.haymon.jwtsecurity.model.Role;
+import dev.haymon.jwtsecurity.controller.dto.user.UserResponse;
 import dev.haymon.jwtsecurity.model.User;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
 import java.util.List;
 
-@Component
-public class UserResponseMapper {
+@Mapper(componentModel = "spring")
+public interface UserResponseMapper {
 
-    public UserResponse toDTO(User user) {
-        List<String> roles = user.getRoles().stream().map(Role::getName).toList();
-        return UserResponse.builder()
-                .id(user.getId())
-                .fullName(user.fullName())
-                .email(user.getEmail())
-                .accountLocked(user.isAccountLocked())
-                .enabled(user.isEnabled())
-                .createdAt(user.getCreatedDate())
-                .lastModifiedAt(user.getLastModifiedDate())
-                .roles(roles)
-                .build();
+    @Mapping(target = "fullName", expression = "java(user.fullName())")
+    @Mapping(target = "createdAt", source = "createdDate")
+    @Mapping(target = "lastModifiedAt", source = "lastModifiedDate")
+    @Mapping(target = "roles", source = "roles", qualifiedByName = "mapRoles")
+    UserResponse toDTO(User user);
+
+    @Named("mapRoles")
+    default List<String> mapRoles(List<dev.haymon.jwtsecurity.model.Role> roles) {
+        return roles.stream().map(dev.haymon.jwtsecurity.model.Role::getName).toList();
     }
 }
