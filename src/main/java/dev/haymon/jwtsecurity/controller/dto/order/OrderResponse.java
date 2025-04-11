@@ -1,6 +1,5 @@
 package dev.haymon.jwtsecurity.controller.dto.order;
 
-import dev.haymon.jwtsecurity.model.OrderItem;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

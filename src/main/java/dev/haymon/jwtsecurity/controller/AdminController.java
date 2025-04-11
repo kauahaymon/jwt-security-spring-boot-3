@@ -1,9 +1,9 @@
 package dev.haymon.jwtsecurity.controller;
 
-import dev.haymon.jwtsecurity.controller.dto.UserResponse;
-import dev.haymon.jwtsecurity.controller.dto.UserUpdateRequest;
 import dev.haymon.jwtsecurity.controller.dto.order.OrderResponse;
 import dev.haymon.jwtsecurity.controller.dto.product.ProductRequest;
+import dev.haymon.jwtsecurity.controller.dto.user.UserResponse;
+import dev.haymon.jwtsecurity.controller.dto.user.UserUpdateRequest;
 import dev.haymon.jwtsecurity.controller.mapper.OrderMapper;
 import dev.haymon.jwtsecurity.controller.mapper.UserResponseMapper;
 import dev.haymon.jwtsecurity.model.Product;
@@ -109,4 +109,15 @@ public class AdminController {
         return ResponseEntity.ok(orderResponses);
     }
 
+    @GetMapping("/users/{userId}/orders")
+    public ResponseEntity<Page<OrderResponse>> listOrdersByUser(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "15") Integer size,
+            @PathVariable("userId") Integer userId
+    ) {
+        Page<OrderResponse> orderResponses = orderService
+                .getUserOrders(page, size, userId)
+                .map(orderMapper::toResponseDTO);
+        return ResponseEntity.ok(orderResponses);
+    }
 }

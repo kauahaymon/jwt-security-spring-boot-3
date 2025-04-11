@@ -1,6 +1,7 @@
 package dev.haymon.jwtsecurity.controller.mapper;
 
 import dev.haymon.jwtsecurity.controller.dto.user.UserResponse;
+import dev.haymon.jwtsecurity.model.Role;
 import dev.haymon.jwtsecurity.model.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -18,7 +19,7 @@ public interface UserResponseMapper {
     UserResponse toDTO(User user);
 
     @Named("mapRoles")
-    default List<String> mapRoles(List<dev.haymon.jwtsecurity.model.Role> roles) {
-        return roles.stream().map(dev.haymon.jwtsecurity.model.Role::getName).toList();
+    default List<String> mapRoles(List<Role> roles) {
+        return roles.stream().map(Role::getName).toList();
     }
 }

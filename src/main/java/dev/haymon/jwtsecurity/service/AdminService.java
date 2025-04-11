@@ -1,6 +1,6 @@
 package dev.haymon.jwtsecurity.service;
 
-import dev.haymon.jwtsecurity.controller.dto.UserUpdateRequest;
+import dev.haymon.jwtsecurity.controller.dto.user.UserUpdateRequest;
 import dev.haymon.jwtsecurity.model.User;
 import dev.haymon.jwtsecurity.repository.RoleRepository;
 import dev.haymon.jwtsecurity.repository.UserRepository;

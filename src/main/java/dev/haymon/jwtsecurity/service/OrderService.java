@@ -9,12 +9,14 @@ import dev.haymon.jwtsecurity.model.User;
 import dev.haymon.jwtsecurity.repository.OrderItemRepository;
 import dev.haymon.jwtsecurity.repository.OrderRepository;
 import dev.haymon.jwtsecurity.repository.ProductRepository;
+import dev.haymon.jwtsecurity.repository.UserRepository;
 import dev.haymon.jwtsecurity.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +31,7 @@ public class OrderService {
     private final OrderRepository repository;
     private final ProductRepository productRepository;
     private final OrderItemRepository orderItemRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public Order placeOrder(OrderRequest request) {
@@ -73,5 +76,12 @@ public class OrderService {
 
     public Page<Order> getAllOrders(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public Page<Order> getUserOrders(Integer pageNumber, Integer pageSize, Integer id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        Pageable orderPage = PageRequest.of(pageNumber, pageSize, Sort.by("createdAt").descending());
+        return repository.findByUserId(user.getId(), orderPage);
     }
 }
