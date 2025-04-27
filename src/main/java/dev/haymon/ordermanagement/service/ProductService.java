@@ -1,8 +1,8 @@
 package dev.haymon.ordermanagement.service;
 
-import dev.haymon.ordermanagement.controller.dto.product.ProductRequest;
-import dev.haymon.ordermanagement.model.Product;
-import dev.haymon.ordermanagement.repository.ProductRepository;
+import dev.haymon.ordermanagement.application.dto.product.ProductRequest;
+import dev.haymon.ordermanagement.domain.model.Product;
+import dev.haymon.ordermanagement.domain.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

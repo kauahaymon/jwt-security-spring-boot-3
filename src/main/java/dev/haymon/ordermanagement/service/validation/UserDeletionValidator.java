@@ -1,7 +1,7 @@
 package dev.haymon.ordermanagement.service.validation;
 
-import dev.haymon.ordermanagement.model.User;
-import dev.haymon.ordermanagement.repository.UserRepository;
+import dev.haymon.ordermanagement.domain.model.User;
+import dev.haymon.ordermanagement.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;

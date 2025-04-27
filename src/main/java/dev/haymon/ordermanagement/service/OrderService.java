@@ -1,15 +1,15 @@
 package dev.haymon.ordermanagement.service;
 
-import dev.haymon.ordermanagement.controller.dto.order.OrderItemRequest;
-import dev.haymon.ordermanagement.controller.dto.order.OrderRequest;
-import dev.haymon.ordermanagement.model.Order;
-import dev.haymon.ordermanagement.model.OrderItem;
-import dev.haymon.ordermanagement.model.Product;
-import dev.haymon.ordermanagement.model.User;
-import dev.haymon.ordermanagement.repository.OrderItemRepository;
-import dev.haymon.ordermanagement.repository.OrderRepository;
-import dev.haymon.ordermanagement.repository.ProductRepository;
-import dev.haymon.ordermanagement.repository.UserRepository;
+import dev.haymon.ordermanagement.application.dto.order.OrderItemRequest;
+import dev.haymon.ordermanagement.application.dto.order.OrderRequest;
+import dev.haymon.ordermanagement.domain.model.Order;
+import dev.haymon.ordermanagement.domain.model.OrderItem;
+import dev.haymon.ordermanagement.domain.model.Product;
+import dev.haymon.ordermanagement.domain.model.User;
+import dev.haymon.ordermanagement.domain.repository.OrderItemRepository;
+import dev.haymon.ordermanagement.domain.repository.OrderRepository;
+import dev.haymon.ordermanagement.domain.repository.ProductRepository;
+import dev.haymon.ordermanagement.domain.repository.UserRepository;
 import dev.haymon.ordermanagement.util.SecurityUtil;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

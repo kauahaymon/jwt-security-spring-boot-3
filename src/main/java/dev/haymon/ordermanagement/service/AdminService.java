@@ -1,9 +1,9 @@
 package dev.haymon.ordermanagement.service;
 
-import dev.haymon.ordermanagement.controller.dto.user.UserUpdateRequest;
-import dev.haymon.ordermanagement.model.User;
-import dev.haymon.ordermanagement.repository.RoleRepository;
-import dev.haymon.ordermanagement.repository.UserRepository;
+import dev.haymon.ordermanagement.application.dto.user.UserUpdateRequest;
+import dev.haymon.ordermanagement.domain.model.User;
+import dev.haymon.ordermanagement.domain.repository.RoleRepository;
+import dev.haymon.ordermanagement.domain.repository.UserRepository;
 import dev.haymon.ordermanagement.service.validation.UserDeletionValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

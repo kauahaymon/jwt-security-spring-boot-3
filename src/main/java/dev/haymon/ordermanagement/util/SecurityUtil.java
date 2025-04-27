@@ -1,6 +1,6 @@
 package dev.haymon.ordermanagement.util;
 
-import dev.haymon.ordermanagement.model.User;
+import dev.haymon.ordermanagement.domain.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
