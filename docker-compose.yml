@@ -1,16 +1,16 @@
 services:
   postgres:
-    container_name: jwt_security_postgres
+    container_name: order_management
     image: postgres
     environment:
-      POSTGRES_DB: jwt_security
+      POSTGRES_DB: order_management_db
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DATA: /var/lib/postgresql/data
     volumes:
       - postgres:/data/postgres
     ports:
-      - 5432:5432
+      - "5432:5432"
     networks:
       - spring-network
     restart: unless-stopped
@@ -19,8 +19,21 @@ services:
     container_name: mail_dev
     image: maildev/maildev
     ports:
-      - 1080:1080
-      - 1025:1025
+      - "1080:1080"
+      - "1025:1025"
+  app:
+    build: .
+    container_name: order_management_app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://order_management:5432/order_management_db
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+    depends_on:
+      - postgres
+    networks:
+      - spring-network
 
 volumes:
   postgres:
