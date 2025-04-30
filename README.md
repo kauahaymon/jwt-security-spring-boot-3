@@ -178,7 +178,7 @@ Você pode baixar a coleção do **Postman** para testar os endpoints da API.
 
 1. Clique no link abaixo para baixar o arquivo da coleção do Postman:
 
-   [`Baixar coleção Postman`](https://github.com/kauahaymon/Desafio_Patos/blob/b9a830cae8fa83a66591fbadbe9f9b7e5e56c879/testes/postman/Pato's.postman_collection.json)
+   [`Baixar coleção Postman`](https://github.com/kauahaymon/order-management-api/blob/main/test/Order%20Management.postman_collection.json)
 
 2. Importe o arquivo JSON no de preferência no **Postaman** para começar a testar os endpoints da API.
 
