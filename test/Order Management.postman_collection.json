@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "d21cf7cd-fedf-4023-916c-0231eae76893",
+		"name": "Order Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36360459"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJlZHVhcmRvQGdtYWlsLmNvbSIsImlhdCI6MTc0NDE1OTk3MywiZXhwIjoxNzQ0MTYxNzczLCJmdWxsTmFtZSI6Impvc2UgZWR1YXJkbyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.vHtUByZhZXtmNvnWMbeyysvZwn1U2jyWpRIGzlV2MfIVycDkG_GMrqFA5pLElWr8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Notebook Acer\",\r\n    \"price\": 4790.90,\r\n    \"description\": \"Windows 10, 1Tsdd e 16 de ram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/products",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJlZHVhcmRvQGdtYWlsLmNvbSIsImlhdCI6MTc0MzEzMTI3NSwiZXhwIjoxNzQzMTMzMDc1LCJmdWxsTmFtZSI6Impvc2UgZWR1YXJkbyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.sDVjjtYIl8cTeV2WBOpPY_xKCNQm8P_-E3jFuc4yKfs9IVM4yFZhh2kkY5WuET55",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Notebook Acer V5\",\r\n    \"price\": 4790.90,\r\n    \"description\": \"Windows 10, 1Tsdd e 16 de ram\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/products/5",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDMxMzA4ODMsImV4cCI6MTc0MzEzMjY4MywiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.H2cO1Gp-mUP5_necvZd4l7JYBkiLVpgtbVuSrykK8rV2ypPuPg6xnP1VetvgpJa7",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/products/1",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"products",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get Users",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDQzMzU2NjEsImV4cCI6MTc0NDMzNzQ2MSwiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.vk9Nc4qaUtAW-tAlVXCkg8_xQ_yMdL_NUasFtyOWqzVU401JS13eD-3HM2cWfb3f",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/users/3",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User by Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDMxMTM3NjgsImV4cCI6MTc0MzExNTU2OCwiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.FQB_olQmTtGg_Mr-Ol9fwNYshVkJPw42XIDEc3pYgO0bOtkdQN_d5RjplDuSuJLP",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/users/3",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDMwOTY1NTMsImV4cCI6MTc0MzA5ODM1MywiZnVsbE5hbWUiOiJhZG1pbiBhZG0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiVVNFUiJ9LHsiYXV0aG9yaXR5IjoiQURNSU4ifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.zHyj3WRYKF72p8I3JfuQUWl7m649yIbawdYCFHwWDUvDSNZ3oGHKoVproUZZN-zg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/users/2",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDMxMTM3NjgsImV4cCI6MTc0MzExNTU2OCwiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.FQB_olQmTtGg_Mr-Ol9fwNYshVkJPw42XIDEc3pYgO0bOtkdQN_d5RjplDuSuJLP",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstname\": \"jose\",\r\n    \"lastname\": \"eduardo\",\r\n    \"email\": \"eduardo@gmail.com\",\r\n    \"password\": \"12345678\",\r\n    \"accountLocked\": false,\r\n    \"enabled\": true,\r\n    \"roles\": [\r\n        \"USER\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/users/3",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"users",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Orders",
+					"item": [
+						{
+							"name": "List All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDQzOTQzMzQsImV4cCI6MTc0NDM5NjEzNCwiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.fxnzKWq-XLpl7zsJsM4lxIyW1Lvss3rTFJXpzgHDVV8W3kzfK_FCnCA3EuWpkzRd",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/orders?page=0&size=5",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List User Orders",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDQzNDE4MDcsImV4cCI6MTc0NDM0MzYwNywiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.4o_wbSbkEmemoFgU1hSkyImmV5SBLpmfgScg8DBolonvvXHqIyeuuAT-HROSnB7y",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}:{{port}}/api/v1/admin/users/2/orders?page=0&size=5",
+									"host": [
+										"{{url}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"users",
+										"2",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDQzMzU2NjEsImV4cCI6MTc0NDMzNzQ2MSwiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.vk9Nc4qaUtAW-tAlVXCkg8_xQ_yMdL_NUasFtyOWqzVU401JS13eD-3HM2cWfb3f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/products",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Orders",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJlZHVhcmRvQGdtYWlsLmNvbSIsImlhdCI6MTc0NDE2OTY2NiwiZXhwIjoxNzQ0MTcxNDY2LCJmdWxsTmFtZSI6Impvc2UgZWR1YXJkbyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.T-PjxaOCHjBX9x4IRIuTEPWINqlxFQmwZipiqJzAzv3ZRN9aA6oOW2IOvgMPksRE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/orders?pageNumber=0&pageSize=10",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJpYXQiOjE3NDMxMzA4ODMsImV4cCI6MTc0MzEzMjY4MywiZnVsbE5hbWUiOiJhZG1pbiBBRE0iLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwidHlwZSI6ImFjY2Vzc1Rva2VuIn0.H2cO1Gp-mUP5_necvZd4l7JYBkiLVpgtbVuSrykK8rV2ypPuPg6xnP1VetvgpJa7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/products/5",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Details",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJlZHVhcmRvQGdtYWlsLmNvbSIsImlhdCI6MTc0NDE2OTY2NiwiZXhwIjoxNzQ0MTcxNDY2LCJmdWxsTmFtZSI6Impvc2UgZWR1YXJkbyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.T-PjxaOCHjBX9x4IRIuTEPWINqlxFQmwZipiqJzAzv3ZRN9aA6oOW2IOvgMPksRE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/orders/4",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"orders",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Oder",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJlZHVhcmRvQGdtYWlsLmNvbSIsImlhdCI6MTc0MzE0MTMyNiwiZXhwIjoxNzQzMTQzMTI2LCJmdWxsTmFtZSI6Impvc2UgZWR1YXJkbyIsImF1dGhvcml0aWVzIjpbeyJhdXRob3JpdHkiOiJST0xFX1VTRVIifV0sInR5cGUiOiJhY2Nlc3NUb2tlbiJ9.g0C-UkoGNYVdTFWcUNyjhWnGt57rZkdKFLf3SloaBOe73Tq67zEgdqhrutLxyKTm",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"productId\": 3,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"productId\": 5,\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/orders",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"\",\r\n    \"lastname\": \"\",\r\n    \"email\": \"\",\r\n    \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"eduardo@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/auth/authenticate",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Account",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/auth/activate-account?token=012969",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"activate-account"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "012969"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh Token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3NDMwOTEzNDUsImV4cCI6MTc0MzA5NDk0NSwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IkFETUlOIn1dLCJ0eXBlIjoicmVmcmVzaFRva2VuIn0.95O1RJsAu5Wg8dU3skfeb32GYz52nqvs095i_lYidwxhmAaKWFcX7BhXF4vErKVj",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:{{port}}/api/v1/auth/refresh-token",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
